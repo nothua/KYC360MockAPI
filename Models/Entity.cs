@@ -39,3 +39,10 @@ public class Name
     public string? MiddleName { get; set; }
     public string? Surname { get; set; }
 }
+
+public enum Gender
+{
+    Male,
+    Female,
+    Other
+}

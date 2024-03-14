@@ -1,3 +1,4 @@
+using KYC360MockAPI.Controllers;
 using KYC360MockAPI.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -5,20 +6,16 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
-builder.Services.AddSingleton<IEntityRepository, MockEntityRepository>();
+builder.Services.AddSingleton<IDatabase, MockDatabase>();
+builder.Services.AddSingleton<IEntityRepository>(provider =>
+{
+    var database = provider.GetRequiredService<IDatabase>();
+    return new MockEntityRepository(database);
+});
+builder.Services.AddSingleton<ILogger<EntityController>, Logger<EntityController>>();
+
 
 var app = builder.Build();
-
-using (var scope = app.Services.CreateScope())
-{
-    var services = scope.ServiceProvider;
-    var entityRepository = services.GetRequiredService<IEntityRepository>();
-
-    if (entityRepository is MockEntityRepository mockEntityRepository)
-    {
-        mockEntityRepository.GenerateMockData();
-    }
-}
 
 if (app.Environment.IsDevelopment())
 {

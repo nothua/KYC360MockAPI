@@ -2,11 +2,12 @@ namespace KYC360MockAPI.Repositories;
 
 using Models;
 
+
 public interface IEntityRepository
 {
-    IEnumerable<Entity?> GetAllEntities();
-    Entity? GetEntityById(string id);
-    void AddEntity(Entity? entity);
-    void UpdateEntity(Entity? entity);
-    void DeleteEntity(string id);
+    Task<bool> AddEntityAsync(Entity entity);
+    Task<bool> UpdateEntityAsync(Entity entity);
+    Task<bool> DeleteEntityAsync(string id);
+    Task<Entity?> GetEntityByIdAsync(string id);
+    Task<IEnumerable<Entity>> GetAllEntitiesAsync();
 }
