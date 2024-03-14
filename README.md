@@ -76,6 +76,10 @@ Implements CRUD endpoints for entities and additional endpoints for searching an
 ## Endpoints
 ### GET /entity
 Returns a list of all entities.
+
+Query Parameters:
+- page : Current page number. Default = 1.
+- pageSize : Number of entries per page. Default = 10.
 ### GET /entity/{id}
 Returns the entity with the specified ID.
 ### POST /entity
@@ -88,7 +92,9 @@ Deletes the entity with the specified ID.
 Searches for entities based on a search query.
 
 Query Parameters:
-search: Search query.
+- search: Search query.
+- page : Current page number. Default = 1.
+- pageSize : Number of entries per page. Default = 10.
 ### GET /entity/filter
 Filters entities based on specified criteria.
 
@@ -97,6 +103,8 @@ Query Parameters:
 - startDate: Start date for filtering.
 - endDate: End date for filtering.
 - countries: Array of countries for filtering.
+- page : Current page number. Default = 1.
+- pageSize : Number of entries per page. Default = 10.
 ### GET /entity/generate
 Generates mock entities for given count.
 
